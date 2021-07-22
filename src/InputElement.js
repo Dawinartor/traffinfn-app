@@ -5,8 +5,8 @@ class InputElement extends React.Component {
     render() {
         return (
             <div className="input">
-                <input className="station-input" placeholder="Name der Station"></input>
-                <button className="search-input">Suchen</button>
+                <input className="search-input" placeholder="Name der Station"></input>
+                <button className="button-input">Suchen</button>
             </div>
         );
     }

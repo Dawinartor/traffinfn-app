@@ -1,6 +1,6 @@
-
-import ReactDOM from 'react-dom';
-import './style.css';
+import React from 'react';
+import TrafficInformation from './TrafficInformation'
+import './App.css';
 
 class App extends React.Component {
     render() {
@@ -12,3 +12,5 @@ class App extends React.Component {
         );
     }
 }
+
+export default App;

@@ -1,19 +1,21 @@
 import React from 'react';
-import './trafficInformation.css';
+import './TrafficInformation.css';
 
 class TrafficInformation extends React.Component {
     render() {
         return (
             <div className="information-board">
-                /* Linie */
-                <h4 className="line"></h4> 
-                /* Verbindungsname */
-                <p className="destination-direction"></p> 
-                /* Typ: S-Bahn oder Bus */
-                <p className="type"></p>
-                /* Ankunftszeit */
-                <p className="time"></p>
+                {/* Linie */}
+                <h4 className="line">Linie</h4> 
+                {/* Verbindungsname */}
+                <p className="destination-direction">Richtung</p> 
+                {/* Typ: S-Bahn oder Bus */}
+                <p className="type">Typ der Verbindung</p>
+                {/* Ankunftszeit */}
+                <p className="time">Abfahrzeit</p>
             </div>
         );
     }
 }
+
+export default TrafficInformation;

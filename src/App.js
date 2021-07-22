@@ -6,7 +6,8 @@ class App extends React.Component {
     render() {
         return (
             <div className="App">
-                <input className="station-input"></input>
+                <input className="station-input" placeholder="Name der Station"></input>
+                <button className="search">Suchen</button>
                 <TrafficInformation />
             </div>
         );

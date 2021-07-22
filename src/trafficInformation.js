@@ -9,7 +9,7 @@ class TrafficInformation extends React.Component {
                 <h4 className="line">Linie</h4> 
                 {/* Verbindungsname */}
                 <p className="destination-direction">Richtung</p> 
-                {/* Typ: S-Bahn oder Bus */}
+                {/* Typ: Bahn oder Bus */}
                 <p className="type">Typ der Verbindung</p>
                 {/* Ankunftszeit */}
                 <p className="time">Abfahrzeit</p>

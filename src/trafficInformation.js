@@ -2,6 +2,8 @@ import React from 'react';
 import './TrafficInformation.css';
 
 class TrafficInformation extends React.Component {
+    constructor(props)
+
     render() {
         return (
             <div className="information-board">

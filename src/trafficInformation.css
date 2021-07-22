@@ -1,1 +1,7 @@
 /* CSS nur fuer TrafficInformation-Komponente */
+.information-board {
+    display: flex;
+    flex-direction: column;
+    background-color: aqua;
+    align-items: center;
+}

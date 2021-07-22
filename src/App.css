@@ -1,1 +1,5 @@
 /* Hier koennten Komponenten-spezifische Einstellungen gemacht werden */
+.App {
+    display: flex;
+    flex-direction: column;
+}

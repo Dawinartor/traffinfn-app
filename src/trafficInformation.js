@@ -6,13 +6,13 @@ class TrafficInformation extends React.Component {
         return (
             <div className="information-board">
                 {/* Linie */}
-                <h4 className="line">Linie</h4> 
+                <h4 className="line">Linie: </h4> 
                 {/* Verbindungsname */}
-                <p className="destination-direction">Richtung</p> 
+                <p className="destination-direction">Richtung: </p> 
                 {/* Typ: Bahn oder Bus */}
-                <p className="type">Typ der Verbindung</p>
+                <p className="type">Typ der Verbindung: </p>
                 {/* Ankunftszeit */}
-                <p className="time">Abfahrzeit</p>
+                <p className="time">Abfahrzeit: </p>
             </div>
         );
     }

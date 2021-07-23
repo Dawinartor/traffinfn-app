@@ -29,6 +29,8 @@ export default App;
 /* 
 Beispiel API-Abfrage
 
+Benutze Insomnia als JSON-Abfrage Beispiel
+
 let APIKEY = 'bd33c3a01995acdee5ef182ddf0e2052';
         let BASEURL = 'https://api.themoviedb.org/3/movie/now_playing';
         let url = BASEURL+'?api_key='+APIKEY;

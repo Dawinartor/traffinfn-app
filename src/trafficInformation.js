@@ -4,12 +4,7 @@ import './TrafficInformation.css';
 class TrafficInformation extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { // Das ist ein JSON-Object 
-            line: '', 
-            destination: '',
-            tuep: '',
-            time: ''
-        };
+       // this.state = { line: '', destination: '', tuep: '', time: ''};
     }
 
     render() {

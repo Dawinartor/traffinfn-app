@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './InputElement.css';
 
 // Komponente soll eingegebenen Text nach "Suchen" nehmen
@@ -15,7 +15,7 @@ class InputElement extends React.Component {
     render() {
         return (
             <div className="input">
-                <h2>Nahverkehr Auskunft für Berlin</h2>
+                <h2 className="highlight">Nahverkehr Auskunft für Berlin</h2>
                 <input 
                 className="search-input" 
                 onChange={this.handleInput} 

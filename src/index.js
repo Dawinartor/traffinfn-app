@@ -8,6 +8,4 @@ ReactDOM.render(
         <App />
     </React.StrictMode>,
     document.getElementById("root") 
-    // Wo ist dieses Element zufinden?
-        // Durch ReactDOM wird ein DOM global erreichbar
 );

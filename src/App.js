@@ -8,6 +8,7 @@ class App extends React.Component {
     constructor(props) {
         super(props); 
         this.state = {trafficInformations: [{linie: 1, destination: 'bla', tuep: 'Bus', time: '10:23'},{linie: 2, destination: 'bla', tuep: 'Bus', time: '10:23'},{linie: 3, destination: 'bla', tuep: 'Bus', time: '10:23'}]};
+        this.apiCall = 
     }
 
 
@@ -16,7 +17,7 @@ class App extends React.Component {
         return (
             <div className="App">
                 <InputElement />
-                <h3 className="">Liste aller Verbindungen</h3>
+                <h3 className="availableTraffic">Liste aller Verbindungen</h3>
                 { items } {/* Auflisten aller items */}
             </div>
         );

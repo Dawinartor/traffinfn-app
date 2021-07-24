@@ -8,7 +8,7 @@ class App extends React.Component {
     constructor(props) {
         super(props); 
         this.state = {trafficInformations: [{linie: 1, destination: 'bla', tuep: 'Bus', time: '10:23'},{linie: 2, destination: 'bla', tuep: 'Bus', time: '10:23'},{linie: 3, destination: 'bla', tuep: 'Bus', time: '10:23'}]};
-        this.apiCall = 
+     //   this.apiCall = 
     }
 
 

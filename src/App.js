@@ -2,63 +2,89 @@ import React from 'react';
 import './App.css';
 import TrafficInformation from './TrafficInformation';
 
-
 class App extends React.Component {
     // Klassen Konstructor bekommt Attribute und Funktionen zugewiesen
     constructor(props) {
         super(props); 
         this.state = {
-                        trafficInformations: [],
-                        inputString: ''
+                        trafficInformations: [{line: '2', destination: 'Ende', tuep: 'Bus', time: '11:02' }, {line: '5', destination: 'Ende', tuep: 'Bus', time: '11:02' }, {line: '11', destination: 'Ende', tuep: 'Bus', time: '11:02' }],
+                        value: 'Alexanderplatz',
+                        error: null,
+                        isLoaded: false,
+                        apiJSON: []
                      };
-        this.handleInput = this.handleInput.bind(this);
+                         // .bind macht Funktion fuer Klasse global verfuegbar
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.apiCall = this.apiCall.bind(this);
+    }
+
+    // Es folgen Definitionen der Funktionen, welche die Klasse bekommen hat
+    handleSubmit(event) 
+    {
+        event.preventDefault();
+        // hole Usereinagbe
+        let queryKey = this.state.value;
+        // hole api Informationen   
+        //this.setState({trafficInformations: this.apiCall(queryKey)});
+        //console.log(this.state.value);
+        this.apiCall(queryKey);
+    }
+
+    apiCall(queryKey) 
+    {
+        // Informationen um api zu verwenden
+        let BASEURL = 'https://v5.vbb.transport.rest/locations?poi=false&addresses=false&query=';
+        let fetchUrl = BASEURL+queryKey;
+
+        fetch(fetchUrl)
+        .then(res => res.json())
+        .then(
+          (result) => {
+            this.setState({
+              isLoaded: true,
+              apiJSON: result.items
+            });
+          },
+          // Note: it's important to handle errors here
+          // instead of a catch() block so that we don't swallow
+          // exceptions from actual bugs in components.
+          (error) => {
+            this.setState({
+              isLoaded: true,
+              error
+            });
+          }
+        )
+        .then(console.log(this.state.items[0].id));
+    }
+
+    handleChange(event) {
+        event.preventDefault();
+        this.setState({value: event.target.value});
     }
 
     // Render bekommt Informationene ueber das Aussehen, wie Klasse aussehen soll
     render() {                                                                     // selbst gebautes props oder Alternativ "...item"
-        var items = this.state.trafficInformations.map(item => < TrafficInformation linie={item.line} destination={item.destination} tuep={item.tuep} time={item.time} />);
+        var items = this.state.trafficInformations.map(item => < TrafficInformation line={item.line} destination={item.destination} tuep={item.tuep} time={item.time} />);
         return (
             <div className="App">
                 <div className="input">
                     <h2 className="highlight">Nahverkehr Auskunft für Berlin</h2>
                     <input 
+                    type="text"
                     className="search-input" 
-                    onChange={this.handleInput} 
-                    value={this.state.inputString} 
+                    onChange={this.handleChange} 
+                    value={this.state.value} 
                     placeholder="Name der Station"></input>
-                    <button className="submit"
+                    <button className="submit-button"
                     onClick={this.handleSubmit}>Suchen</button>
                 </div>
-                <h3 className="availableTraffic">Liste aller Verbindungen</h3>
+                <h3 className="availableTraffic">Liste aller Verbindungen der Haltestelle: {this.state.value}</h3>
                 { items } {/* Auflisten aller TrafficInformation items */}
             </div>
         );
     }
-
-    // Es folgen Definitionen der Funktionen, welche die Klasse bekommen hat
-    handleInput(event) 
-    {
-        // uebergebe Usereingabe an Attribut inputString
-        this.setState({inputString: event.target.inputString});
-        //console.log(this.state.inputString);
-    }
-
-    handleSubmit(event) 
-    {
-        // hole Usereinagbe
-        let queryKey = this.state.inputString;
-        // hole api Informationen   
-        this.setState({trafficInformations: this.apiCall(queryKey)});
-    }
-
-    apiCall(queryKey) 
-    {
-        let BASEURL = 'https://v5.vbb.transport.rest/locations?poi=false&addresses=false&query=';
-        let fetchUrl = BASEURL+queryKey;
-        console.log(fetch(fetchUrl));
-    }
-
 }
 
 export default App;

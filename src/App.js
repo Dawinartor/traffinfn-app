@@ -66,7 +66,7 @@ class App extends React.Component {
 
     // Render bekommt Informationene ueber das Aussehen, wie Klasse aussehen soll
     render() {                                                                     // selbst gebautes props oder Alternativ "...item"
-        var items = this.state.trafficInformations.map(item => < TrafficInformation line={item.line} destination={item.destination} tuep={item.tuep} time={item.time} />);
+        var items = this.state.apiJSON.map(item => < TrafficInformation line={item.name} destination={item.destination} tuep={item.tuep} time={item.time} />);
         return (
             <div className="App">
                 <div className="input">

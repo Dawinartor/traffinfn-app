@@ -43,8 +43,9 @@ class App extends React.Component {
           (result) => {
             this.setState({
               isLoaded: true,
-              apiJSON: result.items
+              apiJSON: result
             });
+            console.log(this.state.apiJSON);
           },
           // Note: it's important to handle errors here
           // instead of a catch() block so that we don't swallow
@@ -56,7 +57,6 @@ class App extends React.Component {
             });
           }
         )
-        .then(console.log(this.state.items[0].id));
     }
 
     handleChange(event) {

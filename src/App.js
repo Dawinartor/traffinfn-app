@@ -7,16 +7,20 @@ class App extends React.Component {
     constructor(props) {
         super(props); 
         this.state = {
-                        trafficInformations: [{line: '2', destination: 'Ende', tuep: 'Bus', time: '11:02' }, {line: '5', destination: 'Ende', tuep: 'Bus', time: '11:02' }, {line: '11', destination: 'Ende', tuep: 'Bus', time: '11:02' }],
+                        trafficInformations: [],
+                        //trafficInformations: [{line: '2', destination: 'Ende', tuep: 'Bus', time: '11:02' }, {line: '5', destination: 'Ende', tuep: 'Bus', time: '11:02' }, {line: '11', destination: 'Ende', tuep: 'Bus', time: '11:02' }],
                         value: 'Alexanderplatz',
                         error: null,
                         isLoaded: false,
+                        location: '',
+                        locationID: '',
                         apiJSON: []
                      };
                          // .bind macht Funktion fuer Klasse global verfuegbar
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.apiCall = this.apiCall.bind(this);
+        this.callAPI_locationID = this.callAPI_locationID.bind(this);
+        this.callAPI_departures = this.callAPI_departures.bind(this);
     }
 
     // Es folgen Definitionen der Funktionen, welche die Klasse bekommen hat
@@ -24,18 +28,48 @@ class App extends React.Component {
     {
         event.preventDefault();
         // hole Usereinagbe
-        let queryKey = this.state.value;
-        // hole api Informationen   
-        //this.setState({trafficInformations: this.apiCall(queryKey)});
-        //console.log(this.state.value);
-        this.apiCall(queryKey);
+        let userInput = this.state.value;
+        
+        let locationName = this.callAPI_locationID(userInput);
+        this.callAPI_departures(locationName);
     }
 
-    apiCall(queryKey) 
+    callAPI_locationID(stationName) 
+    {
+        this.setState({location: stationName});
+
+        let baseURL = "https://v5.vbb.transport.rest/locations?query=";
+        let fetchUrl = baseURL+stationName;
+
+        fetch(fetchUrl)
+        .then(res => res.json())
+        .then(
+          (result) => {
+            this.setState({
+              isLoaded: true,
+              locationID: result[0].id // Rufe stations ID ab
+            });
+            console.log(this.state.location, this.state.locationID );
+          },
+          // Note: it's important to handle errors here
+          // instead of a catch() block so that we don't swallow
+          // exceptions from actual bugs in components.
+          (error) => {
+            this.setState({
+              isLoaded: true,
+              error
+            });
+          }
+        )
+        return this.state.locationID;
+    }
+
+    callAPI_departures(locationID) 
     {
         // Informationen um api zu verwenden
-        let BASEURL = 'https://v5.vbb.transport.rest/locations?poi=false&addresses=false&query=';
-        let fetchUrl = BASEURL+queryKey;
+        let BASEURL = 'https://v5.vbb.transport.rest/stops/';
+        let defaultQueryKeys = 'departures?&remark=false&includeRelatedStations=false&results=999';
+        let fetchUrl = BASEURL + locationID + "/" + defaultQueryKeys;
 
         fetch(fetchUrl)
         .then(res => res.json())
@@ -66,7 +100,7 @@ class App extends React.Component {
 
     // Render bekommt Informationene ueber das Aussehen, wie Klasse aussehen soll
     render() {                                                                     // selbst gebautes props oder Alternativ "...item"
-        var items = this.state.apiJSON.map(item => < TrafficInformation line={item.name} destination={item.destination} tuep={item.tuep} time={item.time} />);
+        var items = this.state.trafficInformations.map(item => < TrafficInformation line={item.name} destination={item.destination} tuep={item.tuep} time={item.time} />);
         return (
             <div className="App">
                 <div className="input">

@@ -68,7 +68,7 @@ class App extends React.Component {
     {
         // Informationen um api zu verwenden
         let BASEURL = 'https://v5.vbb.transport.rest/stops/';
-        let defaultQueryKeys = 'departures?&remark=false&includeRelatedStations=false&results=999';
+        let defaultQueryKeys = 'departures?&remarks=false&includeRelatedStations=false&results=999';
         let fetchUrl = BASEURL + locationID + "/" + defaultQueryKeys;
 
         fetch(fetchUrl)
@@ -77,9 +77,9 @@ class App extends React.Component {
           (result) => {
             this.setState({
               isLoaded: true,
-              apiJSON: result
+              trafficInformations: result
             });
-            console.log(this.state.apiJSON);
+            console.log(this.state.trafficInformations);
           },
           // Note: it's important to handle errors here
           // instead of a catch() block so that we don't swallow
@@ -100,7 +100,7 @@ class App extends React.Component {
 
     // Render bekommt Informationene ueber das Aussehen, wie Klasse aussehen soll
     render() {                                                                     // selbst gebautes props oder Alternativ "...item"
-        var items = this.state.trafficInformations.map(item => < TrafficInformation line={item.name} destination={item.destination} tuep={item.tuep} time={item.time} />);
+        var items = this.state.trafficInformations.map(item => < TrafficInformation line={item.direction} destination={item.destination} tuep={item.tuep} time={item.time} />);
         return (
             <div className="App">
                 <div className="input">

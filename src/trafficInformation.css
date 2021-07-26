@@ -6,3 +6,7 @@
     background-color:aliceblue;
     border-bottom: 2px solid salmon;
 }
+
+h4, p {
+    margin: 5px;
+}

@@ -11,13 +11,17 @@ class TrafficInformation extends React.Component {
         return (
             <div className="information-board">
                 {/* Linie */}
-                <h4 className="line">Linie: {this.props.line} </h4> 
+                <h4 className="id">Linie: {this.props.id} </h4> 
                 {/* Verbindungsname */}
                 <p className="destination-direction">Richtung: {this.props.destination} </p> 
                 {/* Typ: Bahn oder Bus */}
                 <p className="type">Typ der Verbindung: {this.props.tuep} </p>
-                {/* Ankunftszeit */}
+                
+                <p className="spacer"></p>
+                {/* Abfahrzeit */}
                 <p className="time">Abfahrzeit: {this.props.time} </p>
+                {/* Gleis */}
+                <p className="platform">Gleis: {this.props.platform} </p>
             </div>
         );
     }

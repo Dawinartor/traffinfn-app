@@ -16,7 +16,7 @@ class TrafficInformation extends React.Component {
                 <p className="destination-direction">Richtung: {this.props.destination} </p> 
                 {/* Typ: Bahn oder Bus */}
                 <p className="type">Typ der Verbindung: {this.props.tuep} </p>
-                
+                {/* Abstand zwischen den Elementen */}
                 <p className="spacer"></p>
                 {/* Abfahrzeit */}
                 <p className="time">Abfahrzeit: {this.props.time} </p>

@@ -14,7 +14,6 @@ class App extends React.Component {
                         isLoaded: false,
                         location: '',
                         locationID: '',
-                        apiJSON: []
                      };
                          // .bind macht Funktion fuer Klasse global verfuegbar
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -79,7 +78,6 @@ class App extends React.Component {
               isLoaded: true,
               trafficInformations: result
             });
-            console.log(this.state.trafficInformations);
           },
           // Note: it's important to handle errors here
           // instead of a catch() block so that we don't swallow
@@ -91,17 +89,19 @@ class App extends React.Component {
             });
           }
         )
+        console.log(this.state.trafficInformations);
     }
 
-    handleChange(event) {
+    handleChange(event) 
+    {
         event.preventDefault();
         this.setState({value: event.target.value});
     }
 
     // Render bekommt Informationene ueber das Aussehen, wie Klasse aussehen soll
     render() {                                                                     // selbst gebautes props oder Alternativ "...item"
-        var items = this.state.trafficInformations.map(item => < TrafficInformation line={item.direction} destination={item.destination} tuep={item.tuep} time={item.time} />);
-        return (
+        var items = this.state.trafficInformations.map(item => < TrafficInformation id={item.line.id.split('', 2)} destination={item.direction} tuep={item.line.product} time={item.plannedWhen} platform={item.platform} />);
+        return (                                                                     // Was in der geschweiften Klamer ist, greift auf das JSON Objekt zu
             <div className="App">
                 <div className="input">
                     <h2 className="highlight">Nahverkehr Auskunft für Berlin</h2>
